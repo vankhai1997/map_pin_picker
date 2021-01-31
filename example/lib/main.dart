@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Address address;
 
-  var textController=TextEditingController();
+  var textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: MapPicker(
               // pass icon widget
-              iconWidget: Icon(Icons.location_pin,
+              iconWidget: Icon(
+                Icons.location_pin,
                 size: 50,
               ),
               //add map picker controller
@@ -57,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 mapType: MapType.normal,
                 //  camera position
                 initialCameraPosition: cameraPosition,
-
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
@@ -66,23 +66,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   mapPickerController.mapMoving();
                 },
                 onCameraMove: (cameraPosition) {
-
                   this.cameraPosition = cameraPosition;
                 },
                 onCameraIdle: () async {
                   // notify map stopped moving
                   mapPickerController.mapFinishedMoving();
-
                   //get address name from camera position
                   List<Address> addresses = await Geocoder.local
                       .findAddressesFromCoordinates(Coordinates(
-                      cameraPosition.target.latitude,
-                      cameraPosition.target.longitude));
+                          cameraPosition.target.latitude,
+                          cameraPosition.target.longitude));
                   // update the ui with the address
-                  textController.text='${addresses.first?.addressLine ?? ''}';
-                  // setState(() {
-                  //   if (addresses != null) address = addresses.first;
-                  // });
+                  textController.text = '${addresses.first?.addressLine ?? ''}';
                 },
               ),
             ),
@@ -90,20 +85,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color:Colors.transparent,
+        color: Colors.transparent,
         elevation: 0,
-
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           color: Colors.blue,
           child: TextFormField(
             readOnly: true,
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                border: InputBorder.none
-            ),
+                contentPadding: EdgeInsets.zero, border: InputBorder.none),
             controller: textController,
-            style: TextStyle(fontSize: 12,color: Colors.white),
+            style: TextStyle(fontSize: 12, color: Colors.white),
           ),
           // icon: Icon(Icons.directions_boat),
         ),
