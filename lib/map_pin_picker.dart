@@ -46,6 +46,12 @@ class _MapPickerState extends State<MapPicker>
   }
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
