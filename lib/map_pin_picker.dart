@@ -11,12 +11,14 @@ class MapPicker extends StatefulWidget {
   final Widget child;
   final Widget iconWidget;
   final bool? showDot;
+  final double? padding;
   final MapPickerController mapPickerController;
 
   MapPicker(
       {required this.mapPickerController,
       required this.iconWidget,
       this.showDot = true,
+      this.padding,
       required this.child});
 
   @override
@@ -61,22 +63,25 @@ class _MapPickerState extends State<MapPicker>
             builder: (context, snapshot) {
               return Align(
                 alignment: Alignment.center,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Transform.translate(
-                      offset: Offset(0, -10 * animationController.value),
-                      child: widget.iconWidget,
-                    ),
-                    if (widget.showDot ?? false)
-                      Container(
-                        width: 5,
-                        height: 5,
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(5)),
-                      )
-                  ],
+                child: Padding(
+                  padding:  EdgeInsets.only(top: widget.padding??0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Transform.translate(
+                        offset: Offset(0, -10 * animationController.value),
+                        child: widget.iconWidget,
+                      ),
+                      if (widget.showDot ?? false)
+                        Container(
+                          width: 5,
+                          height: 5,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                    ],
+                  ),
                 ),
               );
             }),
