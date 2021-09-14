@@ -64,7 +64,7 @@ class _MapPickerState extends State<MapPicker>
               return Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding:  EdgeInsets.only(top: widget.padding??0),
+                  padding:  EdgeInsets.only(bottom: widget.padding??0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
